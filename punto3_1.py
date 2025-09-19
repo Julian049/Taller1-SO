@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 class RoundRobin:
-    def __init__(self, list):
+    def __init__(self, list, quantum):
         self.list = list
         self.queue = deque()
-        self.quantum = 200
+        self.quantum = quantum
         self.current_time=0
         self.gantt_chart = []
         self.execution_history = []
@@ -240,6 +240,8 @@ if __name__ == "__main__":
         Process("P6", 1100, 300, 300, 0, 0, 0, 0),
     ]
     
+    quantum = int(input("Ingrese el valor del quantum (en ms): "))
+    
     print("SIMULACIÓN DE ROUND ROBIN")
     print("=" * 80)
     print("Procesos a simular:")
@@ -247,8 +249,8 @@ if __name__ == "__main__":
     print("-" * 40)
     for p in processes:
         print(f"{p.name:<10} {p.arrivalTime:<15} {p.originalBurstTime:<15}")
-    
-    rr = RoundRobin(processes)
+
+    rr = RoundRobin(processes, quantum)
     print(f"\nQuantum: {rr.quantum} ms")
     print("\nIniciando simulación...\n")
     results = rr.runRoundRobin()
